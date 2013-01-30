@@ -2,6 +2,7 @@
    and sight height,calculate trajectory for ranges in array ranges[].
    also returns remaining velocity and time of flight to that range.
  */
+#include <stdlib.h>
 #include <stdio.h>
 #include "dragfun.h"
 
@@ -38,7 +39,7 @@ void traject(sandtstruct dragfun, double zero_range, double c,
 	}
       else
 	{
-	  if (errno=vatr(c,ranges[i],v0/a,&(v[i]),&(t[i]),dragfun))
+	  if ((errno=vatr(c,ranges[i],v0/a,&(v[i]),&(t[i]),dragfun)))
 	    {
 	      fprintf(stderr,"Error: %s \n",decode_vatr_err(errno));
 	      exit(1);

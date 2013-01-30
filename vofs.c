@@ -3,6 +3,7 @@
    be refined to quadratic interpolation.  We do a binary search to find the
    starting point.
 */
+#include <stdio.h>
 #include "dragfun.h"
 double vofs(double s, sandtstruct dragfun)
 {
