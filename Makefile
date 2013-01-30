@@ -28,3 +28,6 @@ tofv.o: tofv.c dragfun.h
 traject.o: traject.c dragfun.h
 drop.o: drop.c 
 atmos.o: atmos.c
+
+clean:
+	rm -f *.o abt simple
