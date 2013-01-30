@@ -1,0 +1,7 @@
+#muzz vel, ballistic coeff, bullet weight, seating depth, powder charge
+#.223 remington, 24.9gr AA#2230, Hornady 55 gr BTFMJ, estimated muzzle vel.
+3100 .243  55  2.250 24.9
+#.223 remington, 23.6 gr AA2230, HDY 68gr BTHPM, estimated muzzvel
+2750 .330 68 2.380 23.6
+
+

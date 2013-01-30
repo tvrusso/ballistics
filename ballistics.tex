@@ -1,0 +1,118 @@
+\documentstyle[12pt]{article}
+\begin{document}
+\author{Thomas V. Russo\\A nerdy shooter with too much time on his hands}
+\title{Simple ballistics calculations for nerdy shooters with not
+enough time on their hands}
+\maketitle
+\begin{abstract}
+I will attempt to summarize the basic theory behind the calculation of
+simple ballistic tables from muzzle velocity, ballistic coefficient
+and so forth.
+\end{abstract}
+\section{Statement of the problem}
+In what follows I will ignore the finer points of the problem, since
+they are unnecessary for the purposes of the average shooter.  The
+actual trajectory of a projectile are much more complicated than I
+will make them out to be.  
+
+I will treat a bullet as a point particle moving under the influence
+of two forces: gravity and drag due to the atmosphere. Wind may be
+treated as a correction to this theory.  The drag will be treated
+using an empirical model.
+
+Consider a particle of mass m moving in the fired with velocity $v_0$.
+Gravity is acting in the negative $y$ direction, positive $x$ is
+towards the target, and the velocity is in the $xy$-plane at an angle
+of $\theta$ with respect to the horizontal .  Applying Newton's third
+law of motion one gets the differential equations
+\begin{eqnarray}
+\label{eq:newton-3}
+m\ddot{x} &=& -D\cos\theta =-D \dot{x}/v\\
+m\ddot{y} &=& -g - D\sin\theta = -g - D \dot{y}/v 
+\end{eqnarray}
+where $D$ is the drag force.  Since the initial velocity is taken
+to be in the $xy$-plane for this simple treatment, I will ignore the
+motion in the $z$ direction until we need to consider windage.
+
+\section{Models for the drag force}
+Consider that drag function D to be dependent on the density of the
+air, the diameter of the projectile, the velocity of the projectile
+and the speed of sound in some unspecified way:
+\begin{equation} D=D(\rho,d,v,v_s) \end{equation}
+The dependence of D on the various quantities can be determined from
+{\em dimensional analysis} in the following manner.
+
+Rescale the $x$ and $y$ variables by some parameter $L$, mass by $M$,
+and the time $t$ by a quantity $T$.  Then $x\rightarrow(x/L)=x_1$,
+$y\rightarrow(y/L)=y_1$, $m\rightarrow(m/M)=m_1$ and
+$t\rightarrow(t/T)=t_1$.  The $x$ equation then becomes
+\begin{equation}
+m_1x_1^{\prime\prime}=-D(\rho_1,d_1,v_1,a_1)x_1^{\prime}/v
+\end{equation}
+or
+\begin{equation}
+\left(\frac{ML}{T^2}\right)m\ddot{x}=-D\left[ \left(\frac {M}{L^3}\right)\rho,Ld,\left(\frac
+LT\right)v,\left(\frac LT\right)a\right] \dot{x}/v
+\end{equation}
+which therefore implies, from Equation~\ref{eq:newton-3} that
+\begin{equation}
+D\left[\left(\frac {M}{L^3}\right)\rho,Ld,\left(\frac LT\right)v,\left(\frac LT\right)a\right]=\left(\frac
+{ML}{T^2}\right) D(\rho,d,v,a)
+\end{equation}
+Since $L$, $M$, and $T$ were arbitrary constants, we may set $L=\frac
+1d$, $M=\frac{1}{\rho d^3}$ and $T=\frac vd$ to obtain
+\begin{equation}
+D(1,1,1,(a/v))=\frac{1}{\rho d^2v^2}D(\rho,d,v,a)
+\end{equation}
+or
+\begin{equation}
+D(\rho,d,v,a)=\rho d^2v^2K_D(v/a)
+\end{equation}
+That is, the drag force depends on the atmospheric density, the
+velocity of the projectile, its diameter and a second function, $K_D$,
+called the {\em drag coefficient}, which depends only on $v/a$.  The
+ratio $v/a$ is known as the {\em mach ratio}.
+
+The expressions above may be manipulated down to  
+\begin{eqnarray}
+\ddot{x}&=&\frac{\rho d^2 v^2 \cos \theta}{m} K_D(v/a)\\
+        &=& \frac{\rho d^2 v K_D(v/a)}{m} \dot{x} \\
+        &=& \left[\frac {\rho}{\rho_0}\right] \left[ \rho_0 v K_D(v/a)
+\right] \frac{d^2}{m} \dot{x}
+\end{eqnarray}
+The first bracketed expression is the ratio of the atmospheric density
+to some reference density $\rho_0$. This ratio is often referred to as
+$H$.  The second expression is known as $G(v,a,\rho_0)$, and the
+fraction $C=\frac{m}{d^2}$ is known as the {\em ballistic coefficient}
+for the specified drag function $G$.
+
+The drag functions $G$ are not generally known in analytical form.
+The best that can be had are empirical tabulations of drag functions
+for specific projectile shapes.  These are generally tabulated as
+$G(v)=G(v,a_0,\rho_0)=\rho_0 v K_D(v/a_0)$, where $a_0$ and $\rho_0$
+are the speed of sound and atmospheric density at a standard
+temperature and pressure.  The speed of sound at any other temperature
+is given by $a=a_0 (T/T_0)^{1/2}$, so the function $G(v,a,\rho)$ can
+be obtained using the tables and the relation
+$$G(v,a,\rho)=\frac{\rho}{\rho_0}\left(\frac{T}{T_0}\right)^{1/2}
+G(v\left(\frac{T_0}{T}\right)^{1/2}).$$
+
+Unfortunately the drag force $D=HG/C$ is strictly correct only when
+the projectile being studied is precisely the same shape as the one
+for which $G$ was tabulated.  It is often possible, however, to use
+the same expression by modifying the ballistic coefficient to account
+for the differing shape.  This is done by introducing a {\em form
+factor}, $i$, so that the ballistic coefficient is given by
+$C=\frac{m}{id^2}$.
+
+Commonly used drag functions are the Ingall's table, the British
+1909 table, the Gavr\'e table, and the G1 table.  The G7 table is also
+used for very low drag (VLD) bullets.  Each table is appropriate for
+bullets of a particular range of shapes, and it is essential to use a
+ballistic coefficient appropriate to the table you're using.  The
+ballistic coefficients listed by bullet manufacturers are most likely
+to be derived for the G1 drag model.
+
+\section{Approximations needed to calculate trajectories}
+
+\end{document}
