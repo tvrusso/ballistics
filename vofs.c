@@ -4,9 +4,7 @@
    starting point.
 */
 #include "dragfun.h"
-double vofs(s,dragfun)
-double s;
-sandtstruct dragfun;
+double vofs(double s, sandtstruct dragfun)
 {
   double stest,vlow,vhigh,m;
   double v;

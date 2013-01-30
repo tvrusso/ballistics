@@ -1,43 +1,37 @@
+/*  simple.c
+    An extraordinarily simplistic (if not "simple") program to compute
+    bullet trajectories from Siacci tables for drag functions */
+
+
 #include <stdio.h>
-#ifdef __STDC__
 #include <stdlib.h>
 #include <unistd.h>
-#endif
+#include <string.h>
 #include <math.h>
 #include "dragfun.h"
 #include "g1.h"
-#ifdef USE_G7
 #include "g7.h"
-#endif
-#define maxord(t) 48*t*t
-#define FPM 5280
-#define InPF 12
-#define SECPERHR 3600
-#define FTPERYD 3.0
-#define InPSperMPH(x) ((x)*FPM/SECPERHR*InPF)
+/* conversion factors */
+#define FeetPerMile 5280
+#define InchesPerFoot 12
+#define SecondsPerHour 3600
+#define FeetPerYard 3.0
+/* return inches per second given miles per hour */
+#define InPSperMPH(x) ((x)*FeetPerMile/SecondsPerHour*InchesPerFoot)
 #define MAXTITLE 128
 
-double vofs();
-double sofv();
-double tofv();
-double drop();
-double rhorat();
-double machrat();
-double prat();
+#include "ballistics_prototypes.h"
+#include "atmos.h"
 
-main(argc,argv)
-int argc;
-char **argv;
+int main(int argc,char **argv)
 {
 
-  double muzvel,balcoef,range,vel_left,
-         time_of_flight,d,sight_height,max_ordinate,max_height,elev;
+  double muzvel,balcoef,range,sight_height;
   double C1,altitude,temp,a,rho,pressure;
-  int number_of_intervals,errno,i;
+  int number_of_intervals,i;
   double interval_length,x,zero_range;
   double *ranges,*vels,*times,*ys;
   double atof();
-  int v0;
   int ch;
   int specprec;
   double windvel;
@@ -93,14 +87,12 @@ char **argv;
 	case 'z':
 	  zero_range=atof(optarg);
 	  break;
-#ifdef USE_G7
 	case '7':
 	  thedfun=&g7;
 	  fprintf(stderr," I hope that you put any temperature and pressure specifications AFTER the g7, coz otherwise they'll get overwritten!\n");
 	  pressure=g7.stdpress;
 	  temp=g7.stdtmp;
 	  break;
-#endif
 	case 'T':
 	  strncpy(title,optarg,MAXTITLE);
 	  break;
@@ -143,8 +135,8 @@ char **argv;
   balcoef=C1/rho;
 
 /* Split up range into nice sized intervals for the table */
-  range=range*FTPERYD;
-  zero_range=zero_range*FTPERYD;
+  range=range*FeetPerYard;
+  zero_range=zero_range*FeetPerYard;
   interval_length = range/number_of_intervals;
 
   printf("%s\n",title);
@@ -171,4 +163,5 @@ char **argv;
 "%4d            %5.1f       %5.1f (%5.1f)            %4.3f        %5.1f\n",(int)(ranges[i]/3),vels[i],ys[i],ranges[i]==0?0:ys[i]/(ranges[i]/300),times[i],InPSperMPH(windvel)*(times[i]-ranges[i]/muzvel));
     }
 
+  exit(0);
 }

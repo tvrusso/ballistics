@@ -4,9 +4,7 @@
 */
 #include "dragfun.h"
 
-double sofv(v,dragfun)
-double v;
-sandtstruct dragfun;
+double sofv(double v,sandtstruct dragfun)
 {
   int vi,nent,tabmin,tabmax;
   double slow,shigh,vlow,vhigh,s,m;

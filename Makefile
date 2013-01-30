@@ -1,20 +1,25 @@
+LIBS=-lm
+LDFLAGS=
+CPPFLAGS=
+CFLAGS=-O3 -g -Wall
+
 all:	abt simple
 
 abt:	abt.o vatr.o sofv.o tofv.o vofs.o traject.o drop.o atmos.o
 	cc -o  $@ $> -lm
 
 simple:	simple.o vatr.o sofv.o tofv.o vofs.o traject.o drop.o atmos.o
-	cc -o  $@ $> -lm
+	cc -o ${LDFLAGS} $@ $> ${LIBS}
 
 
 .c.o:
-	cc -c $< 
+	cc ${CPPFLAGS} ${CFLAGS} -c $< 
 
-simple.o: simple.c dragfun.h
-	cc -c -DUSE_G7 simple.c
+simple.o: simple.c dragfun.h atmos.h ballistics_prototypes.h g1.h g7.h
+	cc ${CPPFLAGS} ${CFLAGS} -c simple.c
 
-abt.o: abt.c dragfun.h
-	cc -c -DUSE_G7 abt.c
+abt.o: abt.c dragfun.h atmos.h ballistics_prototypes.h g1.h g7.h
+	cc ${CPPFLAGS} ${CFLAGS} -c abt.c
 
 vatr.o: vatr.c dragfun.h
 vofs.o: vofs.c dragfun.h

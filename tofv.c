@@ -1,11 +1,9 @@
 /* Given a value of v and a table of s and t's with unit increment in v,
-   return value of s for that v by linear interpolation.
+   return value of t for that v by linear interpolation.
 */
 #include "dragfun.h"
 
-double tofv(v,dragfun)
-double v;
-sandtstruct dragfun;
+double tofv(double v,sandtstruct dragfun)
 {
   int vi;
   sttab_entry *sttab;

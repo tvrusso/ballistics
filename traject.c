@@ -5,11 +5,9 @@
 #include <stdio.h>
 #include "dragfun.h"
 
-traject(dragfun,zero_range,c,v0,sight_height,ranges,y,v,t,nr,a)
-sandtstruct dragfun;
-double zero_range,c,v0,sight_height,a;
-double *ranges,*y,*v,*t;
-int nr;
+void traject(sandtstruct dragfun, double zero_range, double c,
+             double v0, double sight_height,
+             double *ranges, double *y, double *v, double *t, int nr, double a)
 {
   double drop();
   int vatr(),errno,i;
@@ -17,7 +15,7 @@ int nr;
   char *decode_vatr_err();
 
   /* first calculate drop for level barrel at zero-in range*/
-  if (errno=vatr(c,zero_range,v0/a,&vrem,&t_o_f,dragfun))
+  if ((errno=vatr(c,zero_range,v0/a,&vrem,&t_o_f,dragfun)))
     {
       fprintf(stderr,"Error: %s \n",decode_vatr_err(errno));
       exit(1);

@@ -1,3 +1,10 @@
+/* abt.c
+   "awkable" ballistics table
+   Just like "simple" but outputs with fewer human readable lines of cruft,
+   designed to be put into a pipeline with "awk" used to filter out things
+   for plotting 
+*/
+
 #include <stdio.h>
 #ifdef __STDC__
 #include <stdlib.h>
@@ -6,9 +13,7 @@
 #include <math.h>
 #include "dragfun.h"
 #include "g1.h"
-#ifdef USE_G7
 #include "g7.h"
-#endif
 #define maxord(t) 48*t*t
 #define FPM 5280
 #define InPF 12
@@ -17,17 +22,10 @@
 #define InPSperMPH(x) ((x)*FPM/SECPERHR*InPF)
 #define MAXTITLE 128
 
-double vofs();
-double sofv();
-double tofv();
-double drop();
-double rhorat();
-double machrat();
-double prat();
+#include "ballistics_prototypes.h"
+#include "atmos.h"
 
-main(argc,argv)
-int argc;
-char **argv;
+main(int argc,char **argv)
 {
 
   double muzvel,balcoef,range,vel_left,
@@ -93,7 +91,6 @@ char **argv;
 	case 'z':
 	  zero_range=atof(optarg);
 	  break;
-#ifdef USE_G7
 	case '7':
 	  thedfun=&g7;
 
@@ -101,7 +98,6 @@ char **argv;
 	  pressure=g7.stdpress;
 	  temp=g7.stdtmp;
 	  break;
-#endif
 	case 'T':
 	  strncpy(title,optarg,MAXTITLE);
 	  break;

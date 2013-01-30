@@ -29,8 +29,7 @@
 #define FEETPERMETER 3.2808
 #define METERSPERFOOT (1.0/FEETPERMETER)
 
-double prat(altitude)
-double altitude;
+double prat(double altitude)
 {
   double altinmeters,presrat;
   altinmeters=METERSPERFOOT*altitude;
@@ -38,9 +37,7 @@ double altitude;
   return(presrat);
 }
 
-double rhorat(altitude,p,p0,t0,t)
-double p,p0;
-double altitude,t0,t;
+double rhorat(double altitude, double p, double p0, double t0, double t)
 {
 
   double temprat,prat();
@@ -49,8 +46,7 @@ double altitude,t0,t;
   return ((p/p0)/temprat);
 }
 
-double machrat(t,t0)
-double t,t0;
+double machrat(double t, double t0)
 {
   return (sqrt(degR(t)/degR(t0)));
 }

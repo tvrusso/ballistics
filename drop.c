@@ -9,8 +9,7 @@
 /* code TRAG1Q uses a quadratic fit to this function, which actually fits */
 /* quite well.  But the function is so simple, why bother?                */
 #include <math.h>
-double drop(v,v0,t)
-double v,v0,t;
+double drop(double v, double v0, double t)
 {
 
   double phi,rat,d;
