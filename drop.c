@@ -4,6 +4,7 @@
 /* Function to calculate the drop at final velocity v, time t             */
 /* return drop in inches                                                  */
 /* The function phi is the one given by McShane, Kelly and Reno as "Phi2" */
+/* on page 280, equation 8                                                */
 /* and is strictly approprate only for a constant K_d model, although it  */
 /* turns out that it has wider applicablilty than that.  The W.C. Davis   */
 /* code TRAG1Q uses a quadratic fit to this function, which actually fits */
@@ -20,6 +21,9 @@ double drop(double v, double v0, double t)
   else
     {
       phi=.5+1.0/(rat-1.0)-1.0/((rat-1.0)*(rat-1.0))*log(rat);
+      /* drop is actually 1/2 g t^2 *phi2(rat) */
+      /* g is 32 ft/sec^2 */
+      /* The 12 is to convert drop to inches */
       d=12.0*16*phi*t*t;
     }
   return (d);
