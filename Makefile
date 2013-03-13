@@ -2,14 +2,15 @@ LIBS=-lm
 LDFLAGS=
 CPPFLAGS=
 CFLAGS=-O3 -g -Wall
+BASIC_OBJS=vatr.o sofv.o tofv.o vofs.o traject.o drop.o atmos.o
 
 all:	abt simple
 
-abt:	abt.o vatr.o sofv.o tofv.o vofs.o traject.o drop.o atmos.o
-	cc -o  $@ $> -lm
+abt:	abt.o ${BASIC_OBJS} 
+	cc -o  $@ abt.o ${BASIC_OBJS} -lm
 
-simple:	simple.o vatr.o sofv.o tofv.o vofs.o traject.o drop.o atmos.o
-	cc -o ${LDFLAGS} $@ $> ${LIBS}
+simple:	simple.o ${BASIC_OBJS}
+	cc -o ${LDFLAGS} $@ simple.o ${BASIC_OBJS} ${LIBS}
 
 
 .c.o:
