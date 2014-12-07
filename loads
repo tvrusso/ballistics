@@ -1,2 +1,3 @@
 simple -a 5200 -t 65 -v 3100 -c .243 -r 600 -n 6 -h 2.625 -w 10 -z 200 -T ".223 55 gr load"
 simple -a 5200 -t 65 -v 2750 -c .330 -r 600 -n 6 -h 2.625 -w 10 -z 200 -T ".223 68 gr load"
+simple -a 5200 -t 65 -v 1070 -c .145 -r 100 -n 8 -h 1.5 -w 10 -z 100 -T ".22 LR 40gr load"
