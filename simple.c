@@ -23,6 +23,8 @@
 #include "ballistics_prototypes.h"
 #include "atmos.h"
 
+/* Given X inches, compute MOA at range R (in feet) */
+#define INCHES_TO_MOA(X,R) (((X)/1.05)/(R/300))
 int main(int argc,char **argv)
 {
 
@@ -156,11 +158,19 @@ int main(int argc,char **argv)
     }
   traject(*thedfun,zero_range,balcoef,muzvel,sight_height,ranges,ys,vels,times,number_of_intervals+1,a);
   printf(
-"Range          Vel           Y(R) (moa)             T(R)         defl(R)\n");
+"Range          Vel           Y(R) (MOA)             T(R)         defl(R) (MOA)\n");
+  printf(
+"------        ------        --------------         ------        -------------\n");
   for (i=0;i<number_of_intervals+1;i++)
     {
       printf(
-"%4d            %5.1f       %5.1f (%5.1f)            %4.3f        %5.1f\n",(int)(ranges[i]/3),vels[i],ys[i],ranges[i]==0?0:ys[i]/(ranges[i]/300),times[i],InPSperMPH(windvel)*(times[i]-ranges[i]/muzvel));
+" %4d         %5.1f        %6.2f (%5.1f)          %4.3f         %5.1f (%4.1f)\n",
+             (int)(ranges[i]/3),vels[i],ys[i],
+             ranges[i]==0?0:INCHES_TO_MOA(ys[i],ranges[i])
+             ,times[i],
+             InPSperMPH(windvel)*(times[i]-ranges[i]/muzvel),
+             ranges[i]==0?0:INCHES_TO_MOA(InPSperMPH(windvel)*(times[i]-ranges[i]/muzvel),ranges[i])
+             );
     }
 
   exit(0);
