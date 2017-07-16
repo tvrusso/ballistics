@@ -1,6 +1,16 @@
 /*  simple.c
     An extraordinarily simplistic (if not "simple") program to compute
-    bullet trajectories from Siacci tables for drag functions */
+    bullet trajectories from Siacci tables for drag functions
+
+    This simple hack assumes that your rifle was zeroed at the selected
+    range with the same cartridge and at the same altitude for which 
+    you're computing drops.  That's why it's called "simple"
+
+    A better program would allow you to specify the zero conditions
+    (temperature, altitude, pressure, cartridge) and compute the drop table
+    for any other cartridge in any other conditions.  
+
+ */
 
 
 #include <stdio.h>
@@ -35,16 +45,14 @@ int main(int argc,char **argv)
   double *ranges,*vels,*times,*ys;
   double atof();
   int ch;
-  int specprec;
+  int pressspec;
+  int tempspec;
   double windvel;
   sandtstruct *thedfun;
   char title[MAXTITLE]="Untitled load";
-
 /* set defaults */
   a=1.0;
   altitude=0.0;
-  pressure=g1.stdpress;
-  temp=g1.stdtmp;
   muzvel=0.0;
   C1=0.0;
   range=0.0;
@@ -53,7 +61,8 @@ int main(int argc,char **argv)
   zero_range=0.0;
   windvel=10.0;
   thedfun=&g1;
-  specprec=0;
+  pressspec=0;
+  tempspec=0;
   while ((ch=getopt(argc,argv,"a:p:t:v:c:r:n:h:w:z:7T:"))!=EOF) 
     {
       switch(ch)
@@ -63,10 +72,11 @@ int main(int argc,char **argv)
 	  break;
 	case 'p':
 	  pressure=atof(optarg);
-	  specprec=1;
+	  pressspec=1;
 	  break;
 	case 't':
 	  temp=atof(optarg);
+          tempspec=1;
 	  break;
 	case 'v':
 	  muzvel=atof(optarg);
@@ -91,9 +101,6 @@ int main(int argc,char **argv)
 	  break;
 	case '7':
 	  thedfun=&g7;
-	  fprintf(stderr," I hope that you put any temperature and pressure specifications AFTER the g7, coz otherwise they'll get overwritten!\n");
-	  pressure=g7.stdpress;
-	  temp=g7.stdtmp;
 	  break;
 	case 'T':
 	  strncpy(title,optarg,MAXTITLE);
@@ -122,7 +129,16 @@ int main(int argc,char **argv)
   if (zero_range == 0.0) 
     zero_range = range;
 
-  if (!specprec && altitude != 0) pressure = thedfun->stdpress*prat(altitude);
+  /* If we specified temperature and/or pressure, use what we were given */
+  /* Otherwise, use what's in the selected drag function */
+  if (!tempspec)
+    temp=thedfun->stdtmp;
+  if (!pressspec)
+    pressure=thedfun->stdpress;
+
+  /* but if pressure was not specified and altitude *was*, correct the 
+     pressure in the drag table for altitude */
+  if (!pressspec && altitude != 0) pressure = thedfun->stdpress*prat(altitude);
 
 /* Allocate core for arrays */
   ranges=(double *)malloc((number_of_intervals+1)*sizeof(double));
