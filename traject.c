@@ -6,13 +6,13 @@
 #include <stdio.h>
 #include "dragfun.h"
 
-void traject(sandtstruct dragfun, double zero_range, double c,
+double traject(sandtstruct dragfun, double zero_range, double c,
              double v0, double sight_height,
              double *ranges, double *y, double *v, double *t, int nr, double a)
 {
   double drop();
   int vatr(),errno,i;
-  double vrem,t_o_f,d,slope;
+  double vrem,t_o_f,d,slope, returnVal;
   char *decode_vatr_err();
 
   /* first calculate drop for level barrel at zero-in range*/
@@ -23,6 +23,7 @@ void traject(sandtstruct dragfun, double zero_range, double c,
     }
   t_o_f/=a;
   d=drop(vrem*a,v0,t_o_f);
+  returnVal=d;
   /* determine slope of line from which to subtract drop:
      bullet strike is at y=0, muzzle is at y=-h.  Drop
      will be from line between muzzle(y=-h) and y=d-h
@@ -50,5 +51,5 @@ void traject(sandtstruct dragfun, double zero_range, double c,
 	}
       y[i]=slope*ranges[i]-sight_height-d;
     }
-
+  return returnVal;
 }

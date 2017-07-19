@@ -50,6 +50,7 @@ int main(int argc,char **argv)
   double windvel;
   sandtstruct *thedfun;
   char title[MAXTITLE]="Untitled load";
+  double dropAtZeroRange;
 /* set defaults */
   a=1.0;
   altitude=0.0;
@@ -164,7 +165,6 @@ int main(int argc,char **argv)
   printf("range=%5.1f yds., rifle zeroed at %5.1f yds\n",range/3.0,zero_range/3.0);
   printf("altitude: %4.2f     Temperature: %4.2f    pressure: %4.2f\n",altitude,temp,pressure);
   printf("Wind velocity %f MPH (%f InPS)\n",windvel,InPSperMPH(windvel));
-  printf("\n");
 
   ranges[0]=0.0;
   for (i=1;i<=number_of_intervals;i++)
@@ -172,7 +172,9 @@ int main(int argc,char **argv)
       x=interval_length*i;
       ranges[i]=x;
     }
-  traject(*thedfun,zero_range,balcoef,muzvel,sight_height,ranges,ys,vels,times,number_of_intervals+1,a);
+  dropAtZeroRange=traject(*thedfun,zero_range,balcoef,muzvel,sight_height,ranges,ys,vels,times,number_of_intervals+1,a);
+  printf(" Drop from bore line at zero range %f inches, %f MOA\n",dropAtZeroRange,INCHES_TO_MOA(dropAtZeroRange,zero_range));
+  printf("\n");
   printf(
 "Range          Vel           Y(R) (MOA)             T(R)         defl(R) (MOA)\n");
   printf(

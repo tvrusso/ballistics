@@ -41,7 +41,8 @@ main(int argc,char **argv)
   double windvel;
   sandtstruct *thedfun;
   char title[MAXTITLE]="Untitled load";
-
+  double dropAtZeroRange;
+  
 /* set defaults */
   a=1.0;
   altitude=0.0;
@@ -158,7 +159,7 @@ main(int argc,char **argv)
       x=interval_length*i;
       ranges[i]=x;
     }
-  traject(*thedfun,zero_range,balcoef,muzvel,sight_height,ranges,ys,vels,times,number_of_intervals+1,a);
+  dropAtZeroRange=traject(*thedfun,zero_range,balcoef,muzvel,sight_height,ranges,ys,vels,times,number_of_intervals+1,a);
   for (i=0;i<number_of_intervals+1;i++)
     {
       printf(
