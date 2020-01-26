@@ -3,3 +3,5 @@ simple -a 5200 -t 65 -v 2750 -c .330 -r 600 -n 6 -h 2.625 -w 10 -z 200 -T ".223 
 simple -a 5200 -t 65 -v 1070 -c .145 -r 100 -n 8 -h 1.5 -w 10 -z 100 -T ".22 LR 40gr load"
 simple -a 5200 -t 65 -v 2500 -c .525 -r 600 -n 12 -h 1.5 -w 10 -z 300 -T "8mm Mauser 196 gr load"
 simple -a 5200 -t 65 -v 2710 -c .580 -r 600 -n 12 -h 1.5 -w 10 -z 100 -T "6.5mm Creedmoor Hornady 140gr BTHP load"
+simple -a 5200 -t 65 -v 2710 -c .646 -r 600 -n 12 -h 1.5 -w 10 -z 100 -T "6.5mm Creedmoor Hornady 140gr ELD-match load"
+simple -a 5200 -t 65 -v 2734 -c .305 -r 600 -n 6 -h 2.625 -w 10 -z 200 -T ".223 Sierra 69 gr HPBT-M, AA2230 22.7gr load"
