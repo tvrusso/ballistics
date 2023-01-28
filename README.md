@@ -98,3 +98,8 @@ right before they dismiss it as inadequate for modern needs and
 explain more modern methods).  You can start your investigating on
 [Wikipedia](https://en.wikipedia.org/wiki/Ballistic_coefficient#Mayevski-Siacci_method)
 
+
+Oh, and in `drop.c` I make reference to "McShane, Kelly, and Reno".
+This is a reference to the book "Exterior Ballistics" which is long
+out of print, but may be found in digital,google-digitized form right
+[here](https://babel.hathitrust.org/cgi/pt?id=mdp.39015040396205).
