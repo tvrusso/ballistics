@@ -103,3 +103,48 @@ Oh, and in `drop.c` I make reference to "McShane, Kelly, and Reno".
 This is a reference to the book "Exterior Ballistics" which is long
 out of print, but may be found in digital,google-digitized form right
 [here](https://babel.hathitrust.org/cgi/pt?id=mdp.39015040396205).
+
+## Example usage and output
+
+A ballistics table for what is basically XM193 (though my personal
+handload) would be obtained with the following command line:
+
+```
+simple -a 5200 -t 65 -v 3100 -c .243 -r 600 -n 6 -h 2.625 -w 10 -z 200 -T ".223 55 gr load"
+```
+
+This specifies that we're requesting a ballistics table for an
+altitude of 5200 feet above sea level (where the range I'm using is
+located) at 65 degrees Fahrenheit.  The range extends to 600 yards and
+we're asking for 6 intermediate ranges (so it'll be eveyr 100 yards).
+The rifle is zeroed at 200 yards and the wind is blowing at 10 miles
+per hour.  The sights on the rifle are 2.625 inches above bore line.
+The cartridge uses bullets with ballistic coefficient 0.243, and the
+muzzle velocity is 3100 feet per second.
+
+The output will be:
+```
+.223 55 gr load
+Drag function: G1 Drag Function
+Muzzle velocity=3100.0 f.p.s.
+ballistic coefficient at STP=0.243, corrected to=0.297 
+range=600.0 yds., rifle zeroed at 200.0 yds
+altitude: 5200.00     Temperature: 65.00    pressure: 24.47
+Wind velocity 10.000000 MPH (176.000000 InPS)
+ Drop from bore line at zero range 8.380592 inches, 3.990758 MOA
+
+Range          Vel           Y(R) (MOA)             T(R)         defl(R) (MOA)
+------        ------        --------------         ------        -------------
+    0         3100.0         -2.62 (  0.0)          0.000           0.0 ( 0.0)
+  100         2776.1          0.94 (  0.9)          0.102           1.0 ( 0.9)
+  200         2474.4          0.00 (  0.0)          0.217           4.1 ( 1.9)
+  300         2192.2         -6.62 ( -2.1)          0.346           9.7 ( 3.1)
+  400         1928.4        -20.49 ( -4.9)          0.491          18.4 ( 4.4)
+  500         1687.5        -43.80 ( -8.3)          0.658          30.6 ( 5.8)
+  600         1470.6        -79.49 (-12.6)          0.848          47.1 ( 7.5)
+```
+
+Note that bullet drop ("Y(R)") is given in inches and in MOA (in
+parentheses), as is windage ("defl(R)").  "Vel" is the velocity of the
+projectile at the tabulated range, and "T(R)" is the time of flight
+(in seconds) to that range.
