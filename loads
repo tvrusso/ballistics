@@ -13,3 +13,6 @@ simple -a 5200 -t 65 -v 2672 -c .34 -r 300 -n 3 -h 2.625 -w 10 -z 100 -T ".223 N
 simple -a 5200 -t 65 -v 2601 -c .415 -r 600 -n 6 -h 2.625 -w 10 -z 100 -T ".223 Nosler CC 80gr HPBT, RL-15 22.8gr load"
 
 simple -a 5200 -t 65 -v 2720 -c .47  -r 200 -n 10 -h 1.5 -w 10 -z 100 -T "Creedmoor 167gr Scenar BTHP .30-06"
+
+
+simple -a 5200 -t 65 -v 2815 -c .255 -r 300 -n 6 -h 2.625 -w 10 -z 50 -T ".223 62 gr American Eagle, WWSD carbine"
