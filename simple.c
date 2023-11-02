@@ -174,6 +174,7 @@ int main(int argc,char **argv)
     }
   dropAtZeroRange=traject(*thedfun,zero_range,balcoef,muzvel,sight_height,ranges,ys,vels,times,number_of_intervals+1,a);
   printf(" Drop from bore line at zero range %f inches, %f MOA\n",dropAtZeroRange,INCHES_TO_MOA(dropAtZeroRange,zero_range));
+  printf(" Drop from bore line at target range %f inches, %f MOA\n",ys[number_of_intervals],INCHES_TO_MOA(ys[number_of_intervals],ranges[number_of_intervals]));
   printf("\n");
   printf(
 "Range          Vel           Y(R) (MOA)             T(R)         defl(R) (MOA)\n");
