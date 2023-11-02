@@ -116,7 +116,7 @@ simple -a 5200 -t 65 -v 3100 -c .243 -r 600 -n 6 -h 2.625 -w 10 -z 200 -T ".223 
 This specifies that we're requesting a ballistics table for an
 altitude of 5200 feet above sea level (where the range I'm using is
 located) at 65 degrees Fahrenheit.  The range extends to 600 yards and
-we're asking for 6 intermediate ranges (so it'll be eveyr 100 yards).
+we're asking for 6 intermediate ranges (so it'll be every 100 yards).
 The rifle is zeroed at 200 yards and the wind is blowing at 10 miles
 per hour.  The sights on the rifle are 2.625 inches above bore line.
 The cartridge uses bullets with ballistic coefficient 0.243, and the
