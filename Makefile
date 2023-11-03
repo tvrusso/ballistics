@@ -7,20 +7,20 @@ BASIC_OBJS=vatr.o sofv.o tofv.o vofs.o traject.o drop.o atmos.o
 all:	abt simple
 
 abt:	abt.o ${BASIC_OBJS} 
-	cc -o  $@ abt.o ${BASIC_OBJS} -lm
+	$(CC) -o  $@ abt.o ${BASIC_OBJS} -lm
 
 simple:	simple.o ${BASIC_OBJS}
-	cc -o ${LDFLAGS} $@ simple.o ${BASIC_OBJS} ${LIBS}
+	$(CC) -o ${LDFLAGS} $@ simple.o ${BASIC_OBJS} ${LIBS}
 
 
 .c.o:
-	cc ${CPPFLAGS} ${CFLAGS} -c $< 
+	$(CC) ${CPPFLAGS} ${CFLAGS} -c $< 
 
 simple.o: simple.c dragfun.h atmos.h ballistics_prototypes.h g1.h g7.h
-	cc ${CPPFLAGS} ${CFLAGS} -c simple.c
+	$(CC) ${CPPFLAGS} ${CFLAGS} -c simple.c
 
 abt.o: abt.c dragfun.h atmos.h ballistics_prototypes.h g1.h g7.h
-	cc ${CPPFLAGS} ${CFLAGS} -c abt.c
+	$(CC) ${CPPFLAGS} ${CFLAGS} -c abt.c
 
 vatr.o: vatr.c dragfun.h
 vofs.o: vofs.c dragfun.h
